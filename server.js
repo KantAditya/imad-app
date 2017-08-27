@@ -15,50 +15,6 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
-var articles = {
-        'article-one': {
-            title: 'Article One | Aditya Kant',
-            heading: 'Article One',
-            date: 'Aug 14,2016',
-            content: `
-                    <p>
-                        This is the content of my first Article. This is the content of my first Article. This is the content of my first Article.
-                        This is the content of my first Article. This is the content of my first Article. This is the content of my first Article.
-                        This is the content of my first Article.
-                    </p>
-                    <p>
-                        This is the content of my first Article. This is the content of my first Article. This is the content of my first Article.
-                        This is the content of my first Article. This is the content of my first Article. This is the content of my first Article.
-                        This is the content of my first Article.
-                    </p>
-                    <p>
-                        This is the content of my first Article. This is the content of my first Article. This is the content of my first Article.
-                        This is the content of my first Article. This is the content of my first Article. This is the content of my first Article.
-                        This is the content of my first Article.
-                    </p>`
-        },
-        'article-two':  { 
-            title: 'Article Two | Aditya Kant',
-            heading: 'Article Two',
-            date: 'Aug 14,2016',
-            content: `
-                    <p>
-                        This is the content of my Second Article. 
-                    </p>`
-            
-        },
-        'article-three': {
-            title: 'Article Three | Aditya Kant',
-            heading: 'Article Three',
-            date: 'Aug 14,2016',
-            content: `
-                    <p>
-                        This is the content of my Third Article. 
-                    </p>`
-            
-        }
-        
-};
 function createTemplate (data) {
     var title = data.title;
     var date = data.date;
