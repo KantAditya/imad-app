@@ -64,17 +64,17 @@ function hash (input, salt) {
     return ["pbkdf2", "10000", salt, hashed.toString('hex')].join('$');
 }
 
-app.get('/hash/:input', function(req, res){
+app.get('/hash/:input', function(req, res) {
     var hashedString = hash(req.params.input, 'this-is-some-random-string ');
     res.send(hashedString);
 });
 
-app.post('/create-user', function (req, res){
+app.post('/create-user', function (req, res) {
    var username = req.body.username;
    var password = req.body.password;
    var salt = crypto.randomBytes(128).toString('hex');
    var dbString = hash(password, salt);
-   pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function (err, result){
+   pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function (err, result) {
        if (err) {
             res.status(500).send(err.toString());
         } else {
@@ -83,23 +83,23 @@ app.post('/create-user', function (req, res){
    });
 });
 
-app.post('/login', function (req, res){
+app.post('/login', function (req, res) {
    var username = req.body.username;
    var password = req.body.password;
    
-   pool.query('SELECT * FROM "user" WHERE username = $1', [username], function (err, result){
+   pool.query('SELECT * FROM "user" WHERE username = $1', [username], function (err, result) {
        if (err) {
             res.status(500).send(err.toString());
         } else {
-            if(result.rows.length === 0){
+            if(result.rows.length === 0) {
              res.send(403).send('username/password is invalid');  
-            } else{
+            } else {
                 var dbString = result.rows[0].password;
                 var salt = dbString.split('$')[2];
                 var hashedPassword = hash(password, salt);
-                if(hashedPassword === dbString){
+                if(hashedPassword === dbString) {
                     res.send('credentials corrct!');
-                } else{
+                } else {
                     res.send(403).send('username/password is Invalid');
                 }
             }
