@@ -4,7 +4,7 @@ var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
-var pool = new Pool(config);
+
 var config = {
     user: 'kantaditya02',
     database: 'kantaditya02',
@@ -69,6 +69,7 @@ app.get('/hash/:input', function(req, res) {
     res.send(hashedString);
 });
 
+var pool = new Pool(config);
 app.post('/create-user', function (req, res) {
    var username = req.body.username;
    var password = req.body.password;
@@ -83,6 +84,7 @@ app.post('/create-user', function (req, res) {
    });
 });
 
+var pool = new Pool(config);
 app.post('/login', function (req, res) {
    var username = req.body.username;
    var password = req.body.password;
@@ -108,7 +110,7 @@ app.post('/login', function (req, res) {
    });
 });
 
-
+var pool = new Pool(config);
 app.get('/test-db', function (req, res) {
     pool.query('SELECT * FROM article', function (err, result) {
         if (err) {
