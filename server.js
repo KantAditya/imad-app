@@ -4,7 +4,7 @@ var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
-
+var pool = new Pool(config);
 var config = {
     user: 'kantaditya02',
     database: 'kantaditya02',
@@ -108,7 +108,7 @@ app.post('/login', function (req, res) {
    });
 });
 
-var pool = new Pool(config);
+
 app.get('/test-db', function (req, res) {
     pool.query('SELECT * FROM article', function (err, result) {
         if (err) {
